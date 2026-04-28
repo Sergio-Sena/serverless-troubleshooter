@@ -169,7 +169,15 @@ pip install -r requirements.txt
 ### 3. Configurar no Amazon Q Developer
 O arquivo `.amazonq/mcp.json` já está configurado com 4 MCP Servers.
 
-### 4. Testar
+### 4. Rodar demo interativa
+```bash
+cd demo
+python run.py
+```
+Escolha `[1] Demo Completa` para ver o fluxo inteiro:
+fluxo feliz → injetar erro → diagnóstico com MCP → correção → validação.
+
+### 5. Testar manualmente
 ```bash
 # Enviar mensagem
 curl -X POST $(terraform output -raw api_url) \
@@ -180,7 +188,7 @@ curl -X POST $(terraform output -raw api_url) \
 # "Investigue o erro do RequestID <id>"
 ```
 
-### 5. Destruir
+### 6. Destruir
 ```bash
 cd infra
 terraform destroy
