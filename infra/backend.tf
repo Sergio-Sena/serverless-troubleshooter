@@ -12,14 +12,13 @@ terraform {
     }
   }
 
-  # Descomentar após criar o bucket e tabela de lock:
-  # backend "s3" {
-  #   bucket         = "troubleshooter-dev-tfstate"
-  #   key            = "infra/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   dynamodb_table = "troubleshooter-dev-tflock"
-  #   encrypt        = true
-  # }
+  backend "s3" {
+    bucket         = "troubleshooter-dev-tfstate"
+    key            = "infra/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "troubleshooter-dev-tflock"
+    encrypt        = true
+  }
 }
 
 provider "aws" {
