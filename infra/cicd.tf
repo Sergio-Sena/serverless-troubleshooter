@@ -51,7 +51,10 @@ resource "aws_iam_role_policy" "github_actions" {
         Action = [
           "lambda:*"
         ]
-        Resource = "arn:aws:lambda:${var.aws_region}:${data.aws_caller_identity.current.account_id}:function:${var.prefix}-*"
+        Resource = [
+          "arn:aws:lambda:${var.aws_region}:${data.aws_caller_identity.current.account_id}:function:${var.prefix}-*",
+          "arn:aws:lambda:${var.aws_region}:${data.aws_caller_identity.current.account_id}:event-source-mapping:*"
+        ]
       },
       {
         Sid    = "IAM"
@@ -108,9 +111,13 @@ resource "aws_iam_role_policy" "github_actions" {
           "logs:PutRetentionPolicy",
           "logs:TagResource",
           "logs:UntagResource",
-          "logs:ListTagsForResource"
+          "logs:ListTagsForResource",
+          "logs:ListTagsLogGroup"
         ]
-        Resource = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.prefix}-*"
+        Resource = [
+          "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.prefix}-*",
+          "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:log-group::log-stream:"
+        ]
       },
       {
         Sid    = "S3TfState"
