@@ -1,0 +1,25 @@
+1. Consultor de FinOps Inteligente (Extensão do Finopsly)
+Em vez de apenas exibir gráficos de custos, você pode criar um Agente de FinOps que utiliza um MCP Server customizado para analisar sua conta AWS em tempo real.
+
+O MCP Server: Desenvolva um servidor que exponha ferramentas para consultar o AWS Cost Explorer API e o AWS Trusted Advisor.
+
+O Projeto: O agente recebe um prompt como "Como posso reduzir 20% do custo de S3 neste mês?". O MCP fornece os dados de uso atuais e as recomendações do Trusted Advisor. O agente então cruza esses dados com as Best Practices de FinOps para sugerir políticas de ciclo de vida de objetos ou instâncias reservadas.
+
+Valor: Transforma dados estáticos em planos de ação personalizados e baseados em custos reais.
+
+
+3. Troubleshooter de Arquiteturas Serverless
+Diagnosticar falhas em sistemas distribuídos (Lambda + SQS + DynamoDB) pode ser complexo. Este projeto foca na observabilidade assistida por IA.
+
+O MCP Server: Um servidor que conecta o agente ao AWS CloudWatch Logs e AWS X-Ray.
+
+O Projeto: Quando ocorre um erro em produção, você fornece o RequestID ao agente. O MCP busca os logs e os traces do X-Ray. O agente analisa o gargalo ou a exceção e sugere a correção exata no código da Lambda ou na configuração de permissões do IAM.
+
+Valor: Demonstra uma aplicação prática de "AI-Ops", focando na cultura DevOps de automação e resposta a incidentes.
+
+Primeiros Passos Recomendados
+Ambiente de Teste: Configure uma pequena stack Serverless (1 Lambda + 1 SQS) que force um erro de permissão.
+
+Hello World MCP: Crie um servidor básico que apenas retorne a versão de uma Lambda via SDK.
+
+Correlação: Tente fazer o agente "pular" de um log para um trace do X-Ray sozinho.

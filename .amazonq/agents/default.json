@@ -1,0 +1,15 @@
+{
+  "name": "troubleshooter-project",
+  "description": "Projeto Serverless Troubleshooter — Time de agentes IA especializados para provisionar e diagnosticar infraestrutura AWS",
+  "version": "2.0.0",
+  "instructions": "Este projeto usa um time de agentes especializados que interagem entre si para provisionar, deployar e diagnosticar infraestrutura AWS. Abordagem estruturada e profissional (não vibe coding).\n\nTIME DE AGENTES:\n- @orchestrator → Coordena os agentes, use para tarefas complexas multi-domínio\n- @infra-agent → Terraform e provisionamento AWS\n- @deploy-agent → CI/CD, GitHub Actions, deploy contínuo\n- @observability-agent → CloudWatch, X-Ray, diagnóstico de falhas\n\nMCP SERVERS ATIVOS:\n- serverless-troubleshooter: CloudWatch Logs + X-Ray + Lambda config (custom)\n- terraform: Documentação oficial do Terraform (contexto atualizado)\n- aws-docs: Documentação oficial da AWS\n- kubernetes: Documentação do Kubernetes\n\nESTADO DO PROJETO:\n- Fase 0-1: ✅ MCP Server custom com 3 tools\n- Fase 2: ✅ Terraform completo (lambda, api-gw, sqs, dynamodb, monitoring)\n- Fase 3: ⏳ Deploy + integração + teste de diagnóstico\n- Fase 4: ⏳ CI/CD + cenários extras + demo\n\nCOMO USAR:\n- Tarefa de infra: 'Preciso criar um novo recurso AWS' → @infra-agent\n- Tarefa de deploy: 'Faça deploy da stack' → @deploy-agent\n- Diagnóstico: 'Investigue o erro RequestID X' → @observability-agent\n- Tarefa complexa: 'Crie infra, deploy e monitore' → @orchestrator",
+  "capabilities": [
+    "agent_orchestration",
+    "terraform_iac",
+    "aws_provisioning",
+    "cicd_pipelines",
+    "observability",
+    "incident_diagnosis",
+    "mcp_integration"
+  ]
+}

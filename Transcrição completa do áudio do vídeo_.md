@@ -1,0 +1,17 @@
+Com certeza! Aqui está a transcrição completa do áudio do vídeo:
+
+"MCP Server, vamo lá. Muito provavelmente você já ouviu falar desse cara, principalmente se você trabalha com inteligência artificial aplicada na área de AWS e de DevOps. Porém, talvez você não saiba exatamente o que significa nem como utilizar no seu dia a dia, mas eu vou te explicar agora.
+
+O MCP Server é a maneira que nós temos de trazer conhecimento externo de maneira estruturada pra dentro da nossa LLM. O que que isso quer dizer? Quer dizer o seguinte: imagina que quando você pede ali pra LLM pra ela fazer a criação de um projeto, por exemplo, com Terraform, criar uma determinada stack pra você de redes ou de banco de dados ou de máquinas virtuais, ela vai utilizar o conhecimento do treinamento dela, que é um conhecimento fixo. 
+
+Dependendo da versão do modelo que vocês tiverem utilizando, que vai ter ali uma data de treinamento antiga, você pode pegar ali até mesmo referências totalmente desatualizadas e incompatíveis com as versões atuais da ferramenta que você tá utilizando. E aí que entra, né, o MCP Server. 
+
+Nesse exemplo que eu dei do Terraform, eu posso, se eu quiser, plugar o MCP Server do Terraform na LLM e aí todo prompt que eu mandar que tenha a ver com Terraform vai ser primeiramente invocado ali o meu MCP Server de Terraform pra garantir que traga esse contexto atualizado da documentação do Terraform pra dentro da LLM pra que ela realmente possa trabalhar e fazer ali um bom output pra mim de acordo com o input que eu solicitei. 
+
+Beleza? Então o MCP Server ele vai dar conhecimento externo e atualizado à sua LLM. Assim como eu dei esse exemplo do Terraform, nós temos MCP Servers pra praticamente tudo. Se a gente cai no mundo da AWS, eu tenho MCP Server pro CDK, que é o Cloud Development Kit, né, é a IaC da AWS. Eu tenho MCP Server de serverless, ou seja, pra utilizar as melhores práticas de acordo com a AWS. E aí eles vão atualizando a versão do MCP Server e eu não preciso depender da atualização do modelo em si. Olha só que legal isso que você tá aprendendo agora.
+
+Se esse tipo de conhecimento interessa pra você e você quer ver como você pode aplicar tudo isso na prática, vem participar do Workshop DevOps na Nuvem com IA porque a gente vai fazer a implementação de um projeto do absoluto zero, aonde nós vamos criar um time de agentes especializados que inclusive interagem entre si pra provisionar uma infraestrutura na AWS. 
+
+Vale ressaltar que a gente não vai fazer utilização de vibe coding, tá? A gente vai fazer de uma maneira estruturada e profissional pra você usar dentro da sua empresa. Cê vai aprender a trabalhar com skills, com rules, vai entender essa questão dos agentes especializados, a gente vai falar também de MCP Servers, melhores práticas de prompts, entre diversas outras coisas, tudo voltado para inteligência artificial aplicada ao mundo de AWS e DevOps. 
+
+Se isso faz sentido pra você, subir um projeto com Terraform, Kubernetes e deploy contínuo na AWS, não perde tempo, clica aqui embaixo e garante o seu ingresso, que nesse momento tá custando bem baratinho, afinal a gente quer que esse conteúdo chegue no maior número de pessoas possível. Clica aí."

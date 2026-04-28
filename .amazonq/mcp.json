@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "serverless-troubleshooter": {
+      "command": "python",
+      "args": ["C:\\Projetos Git\\Projeto com  MCP e Aws\\mcp-server\\server.py"],
+      "env": {
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "terraform": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/terraform-mcp-server"],
+      "env": {
+        "TERRAFORM_DOCS_BASE_URL": "https://registry.terraform.io"
+      }
+    },
+    "aws-docs": {
+      "command": "npx",
+      "args": ["-y", "aws-documentation-mcp-server"],
+      "env": {
+        "AWS_REGION": "us-east-1"
+      }
+    },
+    "kubernetes": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/kubernetes-mcp-server"]
+    }
+  }
+}

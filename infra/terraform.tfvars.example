@@ -1,0 +1,8 @@
+# Copie este arquivo para terraform.tfvars e ajuste os valores
+aws_region         = "us-east-1"
+project_name       = "ServerlessTroubleshooter"
+environment        = "dev"
+prefix             = "troubleshooter-dev"
+log_retention_days = 7
+lambda_runtime     = "python3.11"
+github_repo        = "Sergio-Sena/serverless-troubleshooter"

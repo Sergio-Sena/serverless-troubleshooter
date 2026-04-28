@@ -1,0 +1,85 @@
+name: CI — Terraform Validate & Plan
+
+on:
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - 'infra/**'
+      - '.github/workflows/ci.yml'
+
+permissions:
+  id-token: write   # OIDC
+  contents: read
+  pull-requests: write
+
+env:
+  TF_DIR: infra
+  AWS_REGION: us-east-1
+
+jobs:
+  validate-and-plan:
+    name: Validate & Plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS (OIDC — sem secrets)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5"
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform init -input=false
+
+      - name: Terraform Format Check
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: ${{ env.TF_DIR }}
+        run: terraform plan -input=false -no-color -out=tfplan
+        continue-on-error: true
+
+      - name: Post Plan to PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            let plan = '';
+            try {
+              plan = execSync('cd ${{ env.TF_DIR }} && terraform show -no-color tfplan').toString();
+            } catch (e) {
+              plan = 'Erro ao gerar plan';
+            }
+
+            // Limitar tamanho do comentário
+            if (plan.length > 60000) {
+              plan = plan.substring(0, 60000) + '\n\n... (truncado)';
+            }
+
+            const body = `## Terraform Plan 📋
+            \`\`\`hcl
+            ${plan}
+            \`\`\`
+            *Gerado automaticamente pelo CI*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

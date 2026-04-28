@@ -1,0 +1,13 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfplan
+.terraform.lock.hcl
+
+# Build artifacts
+.build/
+
+# Secrets
+*.tfvars
+!terraform.tfvars.example
