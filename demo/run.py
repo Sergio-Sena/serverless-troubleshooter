@@ -147,8 +147,11 @@ def discover_api_url():
         apis = apigateway.get_apis()
         for api in apis.get("Items", []):
             if PREFIX in api.get("Name", ""):
-                API_URL = f"https://{api['ApiId']}.execute-api.{REGION}.amazonaws.com/dev/send"
-                return API_URL
+                # Verificar se a API tem rotas (ignorar APIs órfãs)
+                routes = apigateway.get_routes(ApiId=api["ApiId"])
+                if routes.get("Items"):
+                    API_URL = f"https://{api['ApiId']}.execute-api.{REGION}.amazonaws.com/dev/send"
+                    return API_URL
     except ClientError:
         pass
     return None
