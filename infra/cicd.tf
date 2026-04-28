@@ -147,6 +147,34 @@ resource "aws_iam_role_policy" "github_actions" {
           "lambda:ListEventSourceMappings"
         ]
         Resource = "*"
+      },
+      {
+        Sid    = "OIDCProvider"
+        Effect = "Allow"
+        Action = [
+          "iam:GetOpenIDConnectProvider",
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:AddClientIDToOpenIDConnectProvider",
+          "iam:RemoveClientIDFromOpenIDConnectProvider",
+          "iam:TagOpenIDConnectProvider",
+          "iam:UntagOpenIDConnectProvider",
+          "iam:ListOpenIDConnectProviderTags"
+        ]
+        Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/token.actions.githubusercontent.com"
+      },
+      {
+        Sid    = "IAMSelf"
+        Effect = "Allow"
+        Action = [
+          "iam:GetRole",
+          "iam:GetRolePolicy",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
+          "iam:ListInstanceProfilesForRole"
+        ]
+        Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.prefix}-github-actions-role"
       }
     ]
   })
