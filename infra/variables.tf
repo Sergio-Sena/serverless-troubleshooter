@@ -39,3 +39,9 @@ variable "github_repo" {
   type        = string
   default     = "Sergio-Sena/serverless-troubleshooter"
 }
+
+variable "domain_name" {
+  description = "Domínio principal no Route 53 (ex: sstechnologies-cloud.com)"
+  type        = string
+  default     = "sstechnologies-cloud.com"
+}

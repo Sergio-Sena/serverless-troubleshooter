@@ -1,0 +1,49 @@
+name: Deploy Site
+
+on:
+  push:
+    branches: [develop, main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-site.yml'
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: troubleshooter.sstechnologies-cloud.com
+
+jobs:
+  deploy:
+    name: Deploy Site to S3 + CloudFront
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync site/ s3://${{ env.S3_BUCKET }} \
+            --delete \
+            --cache-control "max-age=86400"
+
+      - name: Invalidate CloudFront
+        run: |
+          DIST_ID=$(aws cloudfront list-distributions \
+            --query "DistributionList.Items[?Aliases.Items[?contains(@,'troubleshooter')]].Id" \
+            --output text)
+          if [ -n "$DIST_ID" ]; then
+            aws cloudfront create-invalidation \
+              --distribution-id "$DIST_ID" \
+              --paths "/*"
+          fi

@@ -182,6 +182,33 @@ resource "aws_iam_role_policy" "github_actions" {
           "iam:ListInstanceProfilesForRole"
         ]
         Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.prefix}-github-actions-role"
+      },
+      {
+        Sid    = "SiteS3"
+        Effect = "Allow"
+        Action = ["s3:*"]
+        Resource = [
+          "arn:aws:s3:::troubleshooter.${var.domain_name}",
+          "arn:aws:s3:::troubleshooter.${var.domain_name}/*"
+        ]
+      },
+      {
+        Sid      = "SiteCloudFront"
+        Effect   = "Allow"
+        Action   = ["cloudfront:*"]
+        Resource = "*"
+      },
+      {
+        Sid      = "SiteACM"
+        Effect   = "Allow"
+        Action   = ["acm:*"]
+        Resource = "*"
+      },
+      {
+        Sid      = "SiteRoute53"
+        Effect   = "Allow"
+        Action   = ["route53:*"]
+        Resource = "*"
       }
     ]
   })
