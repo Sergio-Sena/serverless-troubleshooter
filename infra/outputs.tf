@@ -42,3 +42,18 @@ output "github_actions_role_arn" {
   description = "ARN do IAM Role para GitHub Actions (OIDC)"
   value       = aws_iam_role.github_actions.arn
 }
+
+output "site_url" {
+  description = "URL do site"
+  value       = "https://troubleshooter.${var.domain_name}"
+}
+
+output "site_bucket" {
+  description = "Nome do bucket S3 do site"
+  value       = aws_s3_bucket.site.id
+}
+
+output "cloudfront_distribution_id" {
+  description = "ID da distribuição CloudFront"
+  value       = aws_cloudfront_distribution.site.id
+}
