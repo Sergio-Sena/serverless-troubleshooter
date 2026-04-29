@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless Troubleshooter — AI-Ops com MCP + Terraform</title>
+    <meta name="description" content="Time de agentes IA especializados que diagnosticam falhas em infraestrutura serverless AWS usando MCP Servers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="badge">🔍 AI-Ops • MCP Server • Terraform • Amazon Q</div>
+        <h1>Serverless<br><span class="gradient-text">Troubleshooter</span></h1>
+        <p class="subtitle">Time de agentes IA especializados que provisionam e diagnosticam infraestrutura serverless AWS usando MCP Servers para contexto atualizado.</p>
+        <p class="approach">Abordagem estruturada e profissional — não é vibe coding.</p>
+        <div class="hero-buttons">
+            <a href="https://github.com/Sergio-Sena/serverless-troubleshooter" class="btn btn-primary" target="_blank">⭐ Ver no GitHub</a>
+            <a href="#demo" class="btn btn-secondary">▶ Ver Demo</a>
+        </div>
+    </div>
+</section>
+
+<!-- Problema -->
+<section class="section" id="problema">
+    <div class="container">
+        <h2>O Problema</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Logs Espalhados</h3>
+                <p>Logs fragmentados entre múltiplas Lambdas no CloudWatch, difíceis de correlacionar.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔗</div>
+                <h3>Traces Fragmentados</h3>
+                <p>X-Ray mostra segmentos isolados. Correlação manual entre serviços é lenta.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h3>Erros de IAM</h3>
+                <p>AccessDeniedException em produção. Qual role? Qual permissão? Qual recurso?</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⏱️</div>
+                <h3>Diagnóstico Manual</h3>
+                <p>RequestID → CloudWatch → X-Ray → IAM → Root Cause. Minutos ou horas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Solução -->
+<section class="section section-dark" id="solucao">
+    <div class="container">
+        <h2>A Solução</h2>
+        <p class="section-subtitle">MCP Servers dão ao Amazon Q Developer acesso direto aos dados de observabilidade. O agente recebe um RequestID e faz tudo sozinho.</p>
+        <div class="flow">
+            <div class="flow-step">
+                <div class="flow-number">1</div>
+                <div class="flow-content">
+                    <h3>Usuário reporta erro</h3>
+                    <code>"Investigue o RequestID abc-123"</code>
+                </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-number">2</div>
+                <div class="flow-content">
+                    <h3>Agente usa MCP Tools</h3>
+                    <code>search_logs → search_trace → search_lambda_config</code>
+                </div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-number">3</div>
+                <div class="flow-content">
+                    <h3>Diagnóstico em ~3s</h3>
+                    <code>"Falta dynamodb:PutItem. Adicione esta policy: {...}"</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Arquitetura -->
+<section class="section" id="arquitetura">
+    <div class="container">
+        <h2>Arquitetura</h2>
+        <div class="arch-grid">
+            <div class="arch-block">
+                <h3>Stack Serverless</h3>
+                <div class="arch-diagram">
+                    <div class="arch-node node-blue">API Gateway</div>
+                    <div class="arch-connector">→</div>
+                    <div class="arch-node node-orange">Producer Lambda</div>
+                    <div class="arch-connector">→</div>
+                    <div class="arch-node node-purple">SQS Queue</div>
+                    <div class="arch-connector">→</div>
+                    <div class="arch-node node-orange">Consumer Lambda</div>
+                    <div class="arch-connector">→</div>
+                    <div class="arch-node node-green">DynamoDB</div>
+                </div>
+            </div>
+            <div class="arch-block">
+                <h3>CI/CD (Zero Secrets)</h3>
+                <div class="arch-diagram">
+                    <div class="arch-node node-gray">feature/*</div>
+                    <div class="arch-connector">PR→</div>
+                    <div class="arch-node node-blue">develop</div>
+                    <div class="arch-connector">PR→</div>
+                    <div class="arch-node node-green">main</div>
+                </div>
+                <p class="arch-note">GitHub Actions + OIDC → AWS (sem access keys)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Agentes -->
+<section class="section section-dark" id="agentes">
+    <div class="container">
+        <h2>Time de Agentes IA</h2>
+        <p class="section-subtitle">Agentes especializados com skills e responsabilidades claras. Cada um usa MCP Servers específicos.</p>
+        <div class="agents-grid">
+            <div class="agent-card agent-orchestrator">
+                <div class="agent-icon">🎯</div>
+                <h3>@orchestrator</h3>
+                <p class="agent-role">Coordenador</p>
+                <p>Analisa requisições, delega para agentes certos, consolida resultados.</p>
+                <div class="agent-mcp">MCP: todos</div>
+            </div>
+            <div class="agent-card agent-infra">
+                <div class="agent-icon">🏗️</div>
+                <h3>@infra-agent</h3>
+                <p class="agent-role">Infraestrutura</p>
+                <p>Terraform HCL, IAM least privilege, provisionamento AWS.</p>
+                <div class="agent-mcp">MCP: terraform, aws-docs</div>
+            </div>
+            <div class="agent-card agent-deploy">
+                <div class="agent-icon">🚀</div>
+                <h3>@deploy-agent</h3>
+                <p class="agent-role">Deploy & CI/CD</p>
+                <p>GitHub Actions, terraform apply, rollback, environments.</p>
+                <div class="agent-mcp">MCP: terraform, kubernetes</div>
+            </div>
+            <div class="agent-card agent-obs">
+                <div class="agent-icon">🔍</div>
+                <h3>@observability-agent</h3>
+                <p class="agent-role">Diagnóstico</p>
+                <p>CloudWatch Logs, X-Ray traces, análise de incidentes em tempo real.</p>
+                <div class="agent-mcp">MCP: troubleshooter, aws-docs</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MCP Servers -->
+<section class="section" id="mcp">
+    <div class="container">
+        <h2>MCP Servers</h2>
+        <p class="section-subtitle">Contexto atualizado para a LLM — não depende do treinamento do modelo.</p>
+        <div class="mcp-grid">
+            <div class="mcp-card">
+                <h3>🔧 serverless-troubleshooter</h3>
+                <p class="mcp-type">Custom (Python + boto3)</p>
+                <ul>
+                    <li><code>search_logs</code> — CloudWatch por RequestID</li>
+                    <li><code>search_trace</code> — X-Ray segments e erros</li>
+                    <li><code>search_lambda_config</code> — Runtime, IAM, triggers</li>
+                </ul>
+            </div>
+            <div class="mcp-card">
+                <h3>📘 terraform</h3>
+                <p class="mcp-type">Oficial</p>
+                <p>Documentação e best practices atualizadas do Terraform. Garante HCL correto.</p>
+            </div>
+            <div class="mcp-card">
+                <h3>📙 aws-docs</h3>
+                <p class="mcp-type">Oficial</p>
+                <p>Documentação oficial da AWS. Limites, configurações e exemplos atualizados.</p>
+            </div>
+            <div class="mcp-card">
+                <h3>📗 kubernetes</h3>
+                <p class="mcp-type">Oficial</p>
+                <p>Documentação do K8s para expansão futura com EKS.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Demo -->
+<section class="section section-dark" id="demo">
+    <div class="container">
+        <h2>Demo — Diagnóstico Real</h2>
+        <div class="terminal">
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">demo/run.py</span>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+                <div class="term-line dim">$ python run.py --auto</div>
+                <div class="term-line"></div>
+            </div>
+        </div>
+        <div class="demo-controls">
+            <button class="btn btn-primary" id="btn-play" onclick="startDemo()">▶ Iniciar Demo</button>
+            <button class="btn btn-secondary" id="btn-reset" onclick="resetDemo()" style="display:none">↺ Reiniciar</button>
+        </div>
+    </div>
+</section>
+
+<!-- Cenários -->
+<section class="section" id="cenarios">
+    <div class="container">
+        <h2>Cenários de Erro</h2>
+        <div class="scenarios">
+            <div class="scenario">
+                <div class="scenario-status error">ERROR</div>
+                <h3>Permission Denied</h3>
+                <code>AccessDeniedException: dynamodb:PutItem</code>
+                <p>Agente encontra log de erro + sugere policy IAM exata.</p>
+            </div>
+            <div class="scenario">
+                <div class="scenario-status warning">TIMEOUT</div>
+                <h3>Lambda Timeout</h3>
+                <code>Task timed out after 1.00 seconds</code>
+                <p>Agente encontra REPORT + sugere aumentar timeout/memória.</p>
+            </div>
+            <div class="scenario">
+                <div class="scenario-status warning">THROTTLE</div>
+                <h3>DynamoDB Throttle</h3>
+                <code>ProvisionedThroughputExceededException</code>
+                <p>Agente encontra trace com latência + sugere on-demand.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stack -->
+<section class="section section-dark" id="stack">
+    <div class="container">
+        <h2>Stack Técnica</h2>
+        <div class="stack-grid">
+            <div class="stack-item"><span class="stack-label">Agente IA</span><span>Amazon Q Developer</span></div>
+            <div class="stack-item"><span class="stack-label">MCP Servers</span><span>Python + boto3 (custom) + oficiais</span></div>
+            <div class="stack-item"><span class="stack-label">IaC</span><span>Terraform (remote state S3)</span></div>
+            <div class="stack-item"><span class="stack-label">Compute</span><span>AWS Lambda (Python 3.11)</span></div>
+            <div class="stack-item"><span class="stack-label">Messaging</span><span>Amazon SQS</span></div>
+            <div class="stack-item"><span class="stack-label">Database</span><span>Amazon DynamoDB (on-demand)</span></div>
+            <div class="stack-item"><span class="stack-label">API</span><span>API Gateway (HTTP API)</span></div>
+            <div class="stack-item"><span class="stack-label">Observabilidade</span><span>CloudWatch + X-Ray</span></div>
+            <div class="stack-item"><span class="stack-label">CI/CD</span><span>GitHub Actions + OIDC</span></div>
+            <div class="stack-item"><span class="stack-label">Hosting</span><span>S3 + CloudFront + OAC</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <p>Desenvolvido por <a href="https://github.com/Sergio-Sena" target="_blank">Sergio Sena</a> · <a href="https://linkedin.com/in/sergio-sena" target="_blank">LinkedIn</a> · <a href="https://github.com/Sergio-Sena/serverless-troubleshooter" target="_blank">GitHub</a></p>
+    </div>
+</footer>
+
+<script src="demo.js"></script>
+</body>
+</html>
